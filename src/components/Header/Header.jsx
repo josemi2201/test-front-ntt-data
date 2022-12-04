@@ -18,7 +18,10 @@ export const Header = ({children}) => {
         <HeaderNavigation />
         <HeaderActions />
       </AppBar>
-      <Box component="main">
+      <Box 
+        component="main"
+        sx={sx.main}
+      >
         {children}
       </Box>
     </Box>
@@ -29,6 +32,7 @@ const sx = {
   header: {
     display: 'flex',
     flexDirection: 'column',
+    height: '100%',
   },
   appbar: {
     display: 'flex',
@@ -37,6 +41,9 @@ const sx = {
     justifyContent: 'space-between',
     padding: "0 8px",
   },
+  main: {
+    backgroundColor: 'background.default',
+  }
 }
 
 Header.propTypes = {

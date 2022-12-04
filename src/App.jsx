@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from '@mui/material';
 import React from 'react';
 import {
   createBrowserRouter, Navigate, RouterProvider
@@ -21,9 +22,20 @@ export const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "#f5f5f5",
+    },
+  },
+});
+
+
 export const App = () => {
 
   return (
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   )
 }
