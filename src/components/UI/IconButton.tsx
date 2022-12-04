@@ -22,8 +22,6 @@ export const IconButton = (props) => {
   const iconColor = color ? color : primary.contrastText
   const newColorBadge = colorBadge ? colorBadge : "secondary"
 
-  console.log(newColorBadge);
-
   return (
     <Tooltip
       title={tooltip}
