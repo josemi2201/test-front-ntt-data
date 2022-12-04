@@ -8,7 +8,7 @@ export const useData = () => {
         ...product,
         imgUrl: "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg", // TODO: remove this line when api is ready
         description:  product.brand || product.model ? `${product.brand} ${product.model}`.trim() : "No description",
-        priceDescription: product.price ? `Price: ${product.price}` : "No price",
+        priceDescription: product.price ? `${product.price} €` : "No price",
       }
     })
 
@@ -27,7 +27,7 @@ export const useData = () => {
       ...product,
       imgUrl: "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg", // TODO: remove this line when api is ready
       description:  product.brand || product.model ? `${product.brand} ${product.model}`.trim() : "No description",
-      priceDescription: product.price ? `Price: ${product.price}` : "No price",
+      priceDescription: product.price ? `${product.price} €` : "No price",
     }
     
     return product

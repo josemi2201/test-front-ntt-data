@@ -32,6 +32,7 @@ export const ProductsList = () => {
       <Grid 
         container 
         sx={sx.contSearch}
+        component="section"
       >
         <Grid 
           item 
