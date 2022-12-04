@@ -1,11 +1,10 @@
 import React from 'react'
-import { Header } from '../components/Header'
+import { Header } from '../components/Header/Header'
 
 export const ProductDetail = () => {
   return (
-    <>
-      <Header />
+    <Header>
       <div>ProductDetail</div>
-    </>
+    </Header>
   )
 }
