@@ -1,8 +1,23 @@
+import { useContext } from "react"
+import { testApi } from "../api/testApi"
+import { CartContext } from "../context/CartContext"
 import { productsDemoList } from "../data/demoData"
+
 
 export const useData = () => {
 
-  const getProducts = () => {
+  const { setCartNumber } = useContext(CartContext)
+
+  const getProducts = async () => {
+    
+    const isExpiredDate = false
+
+    if(isExpiredDate){
+      const response = await testApi.get("/product")
+      console.log(response);
+      return response.data
+    }
+
     let products = productsDemoList.map(product => {
       return {
         ...product,
@@ -15,7 +30,16 @@ export const useData = () => {
     return products
   }
 
-  const getProduct = (id) => {
+  const getProduct = async (id) => {
+
+    const isExpiredDate = false
+
+    if(isExpiredDate){
+      const response = await testApi.get(`/product/${id}`)
+      console.log(response);
+      return response.data
+    }
+
     let product = productsDemoList.find(product => product.id === id)
 
     if (!product) {
@@ -33,8 +57,12 @@ export const useData = () => {
     return product
   }
 
-  const addCard = (data) => {
-    console.info(data)
+  const addCard = async (data) => {
+
+    // const { data } = await testApi.post("/cart", data)
+    // setCartNumber(data.count)
+    console.log(data)
+    setCartNumber(num => num + 1)
   }
 
 

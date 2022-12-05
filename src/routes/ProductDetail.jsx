@@ -18,7 +18,9 @@ export const ProductDetail = () => {
   } = product
 
   useEffect(() => {
-    setProduct(getProduct(id))
+    getProduct(id)
+      .then( product => setProduct(product))
+      .catch( error => alert(error.message))
   }, [])
 
   return (
