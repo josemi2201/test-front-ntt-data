@@ -1,15 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types';
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { Avatar, Card, Typography, CardMedia, CardContent } from '@mui/material';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductListItem = ({product}) => {
 
   const { id, description, priceDescription, imgUrl} = product
-
+  
+  const navigate = useNavigate();
 
   const handleClickProduct = () => {
-    alert(`You clicked on product ${id}`)
+    navigate(`/product/${id}`);
   }
 
   return (
@@ -46,6 +48,6 @@ const sx = {
   }
 }
 
-ProductListItem.prototype = {
+ProductListItem.propTypes = {
   product: PropTypes.object.isRequired
 }
