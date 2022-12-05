@@ -703,9 +703,9 @@ export const productsDemoList = [
 
 export const colorsDemo = [
   {id: '1', label: 'Black'},
-  {id: '2', label: 'White'},
-  {id: '3', label: 'Red'},
-  {id: '4', label: 'Blue'},
+  // {id: '2', label: 'White'},
+  // {id: '3', label: 'Red'},
+  // {id: '4', label: 'Blue'},
 ]
 
 export const storageDemo = [

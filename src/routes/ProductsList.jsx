@@ -12,15 +12,21 @@ export const ProductsList = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    setProducts(getProducts())
+    getProducts()
+      .then( products => setProducts(products))
+      .catch( error => alert(error.message))    
   }, [])
 
   useEffect(() => {
-    const filteredProducts = getProducts().filter(product => 
-      (product.brand && product.brand.toLowerCase().includes(search.toLowerCase())) ||
-      (product.model && product.model.toLowerCase().includes(search.toLowerCase()))
-    )
-    setProducts(filteredProducts)
+    getProducts()
+      .then( products => {
+        const filteredProducts = products.filter(product => 
+          (product.brand && product.brand.toLowerCase().includes(search.toLowerCase())) ||
+          (product.model && product.model.toLowerCase().includes(search.toLowerCase()))
+        )
+        setProducts(filteredProducts)
+      })
+      .catch( error => alert(error.message))
   }, [search])
 
   const handleChangeSearch = (event) => {
