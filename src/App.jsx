@@ -3,9 +3,9 @@ import React from 'react';
 import {
   createBrowserRouter, Navigate, RouterProvider
 } from "react-router-dom";
+import { CartProvider } from './context/CartContext';
 import { ProductDetail } from './routes/ProductDetail';
 import { ProductsList } from './routes/ProductsList';
-
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +35,9 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </ThemeProvider>
   )
 }

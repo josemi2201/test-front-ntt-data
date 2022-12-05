@@ -1,19 +1,22 @@
 import { mdiArrowLeft } from '@mdi/js'
-import { Avatar, Box, Breadcrumbs, IconButton as MuiIconButton, Link, useTheme } from '@mui/material'
+import { Avatar, Box, IconButton as MuiIconButton } from '@mui/material'
+import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import logoImg from '../../assets/logo.png'
 import { IconButton } from '../UI/IconButton'
-import React from 'react'
+import { HeaderBreadcrumbs } from './HeaderBreadcrumbs'
 
 export const HeaderNavigation = () => {
 
-  const { palette: { primary } } = useTheme()
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const handleClickLogo = () => {
-    alert('Logo clicked')
+    navigate
   }
 
   const handleClickPreviousPage = () => {
-    alert('PreviousPage clicked')
+    navigate(-1)
   }
 
   return (
@@ -23,28 +26,15 @@ export const HeaderNavigation = () => {
       <MuiIconButton onClick={handleClickLogo}>
         <Avatar src={logoImg} />
       </MuiIconButton>
-      <IconButton
-        icon={mdiArrowLeft}
-        onClick={handleClickPreviousPage}
-        size={1.3}
-        tooltip="Previous page"
-      />
-      <Breadcrumbs color={primary.contrastText}>
-        <Link 
-          underline="hover" 
-          color="inherit" 
-          href="/product"
-        >
-          Product
-        </Link>
-        <Link 
-          underline="hover" 
-          color="inherit" 
-          href="/product/z45a56465w"
-        >
-          Mobile 1
-        </Link>
-      </Breadcrumbs>
+      {
+        pathname !== "/product" && <IconButton
+          icon={mdiArrowLeft}
+          onClick={handleClickPreviousPage}
+          size={1.3}
+          tooltip="Previous page"
+        />
+      }
+      <HeaderBreadcrumbs />
     </Box>
   )
 }
