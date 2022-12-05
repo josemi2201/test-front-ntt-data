@@ -1,8 +1,20 @@
 import { useContext } from "react"
 import { testApi } from "../api/testApi"
 import { CartContext } from "../context/CartContext"
-import { productsDemoList } from "../data/demoData"
+import { getLocalStorage } from "../helpers/localStorage"
+import { getDiffBetweenDates } from "../helpers/time"
 
+const TIME_TO_UPDATE = 1
+const TIME_OPERATOR = "hours" 
+
+const formatProduct = (product) => {
+  return {
+    ...product,
+    imgUrl: "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg", // TODO: remove this line when api is ready
+    description:  product.brand || product.model ? `${product.brand} ${product.model}`.trim() : "No description",
+    priceDescription: product.price ? `${product.price} €` : "No price",
+  }
+}
 
 export const useData = () => {
 
@@ -10,61 +22,44 @@ export const useData = () => {
 
   const getProducts = async () => {
     
-    const isExpiredDate = false
+    const {updateAt, products: productsLocal} = getLocalStorage("vm-products", true)
+    const diffHours = getDiffBetweenDates(updateAt, new Date(), TIME_OPERATOR)
+    const isExpiredDate = diffHours >= TIME_TO_UPDATE
 
     if(isExpiredDate){
       const response = await testApi.get("/product")
       console.log(response);
-      return response.data
+      return response.data.map(formatProduct)
     }
 
-    let products = productsDemoList.map(product => {
-      return {
-        ...product,
-        imgUrl: "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg", // TODO: remove this line when api is ready
-        description:  product.brand || product.model ? `${product.brand} ${product.model}`.trim() : "No description",
-        priceDescription: product.price ? `${product.price} €` : "No price",
-      }
-    })
-
-    return products
+    return productsLocal.map(formatProduct)
   }
 
   const getProduct = async (id) => {
 
-    const isExpiredDate = false
+    const {updateAt, productsDetails: productsDetailsLocal} = getLocalStorage("vm-productsDetails", true)
+    const diffHours = getDiffBetweenDates(updateAt, new Date(), TIME_OPERATOR)
+    const isExpiredDate = diffHours >= TIME_TO_UPDATE
 
     if(isExpiredDate){
       const response = await testApi.get(`/product/${id}`)
-      console.log(response);
-      return response.data
+
+      return formatProduct(response.data)
     }
 
-    let product = productsDemoList.find(product => product.id === id)
+    let product = productsDetailsLocal[id]
 
     if (!product) {
-      alert(`Product with id ${id} not found`)
       return {}
     }
-
-    product = {
-      ...product,
-      imgUrl: "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg", // TODO: remove this line when api is ready
-      description:  product.brand || product.model ? `${product.brand} ${product.model}`.trim() : "No description",
-      priceDescription: product.price ? `${product.price} €` : "No price",
-    }
     
-    return product
+    return formatProduct(product)
   }
 
   const addCard = async (data) => {
-
-    // const { data } = await testApi.post("/cart", data)
-    // setCartNumber(data.count)
-    console.log(data)
-    setCartNumber(num => num + 1)
+    const { data: dataResponse } = await testApi.post("/cart", data)
+    setCartNumber(dataResponse.count)
   }
-
 
   return {
     getProducts,
