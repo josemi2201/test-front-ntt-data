@@ -9,3 +9,7 @@ main{
   padding: 32px;
   height: 100%;
 }
+
+.animate__animated.animate__fadeIn{
+  --animate-duration: 0.5s;
+}

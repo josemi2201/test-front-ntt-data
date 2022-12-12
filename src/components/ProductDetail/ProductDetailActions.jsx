@@ -2,7 +2,6 @@ import { mdiCartArrowDown } from '@mdi/js';
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { colorsDemo, storageDemo } from '../../data/demoData';
 import { Button } from '../UI/Button';
 import { Select } from '../UI/Select';
 import * as yup from 'yup';
@@ -20,7 +19,7 @@ const validationSchema = yup.object({
 
 export const ProductDetailActions = ({product}) => {
 
-  const { addCard } = useData();
+  const { addCart } = useData();
   
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -35,9 +34,9 @@ export const ProductDetailActions = ({product}) => {
               ...values,
             }
 
-            addCard(data)
+            addCart(data)
         } catch (error) {
-          alert(error.message)
+          console.error(error.message)
         }
     },
   });
@@ -60,7 +59,7 @@ export const ProductDetailActions = ({product}) => {
           <Select 
             label="Storage"
             name="storageCode"
-            options={storageDemo}
+            options={product.storages}
             value={values.storageCode}
             handleChange={handleChange}
             touched={touched}
@@ -69,7 +68,7 @@ export const ProductDetailActions = ({product}) => {
           <Select 
             label="Color"
             name="colorCode"
-            options={colorsDemo}
+            options={product.colors}
             value={values.colorCode}
             handleChange={handleChange}
             touched={touched}

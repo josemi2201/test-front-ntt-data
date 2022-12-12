@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react';
 import { Grid, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header/Header';
@@ -5,7 +6,8 @@ import { ProductListItem } from '../components/ProductList/ProductListItem';
 import { useData } from '../hooks/useData';
 
 export const ProductsList = () => {
-
+  
+  const { palette: { background, primary } } = useTheme()
   const { getProducts } = useData();
 
   const [products, setProducts] = useState([])
@@ -14,7 +16,7 @@ export const ProductsList = () => {
   useEffect(() => {
     getProducts()
       .then( products => setProducts(products))
-      .catch( error => alert(error.message))    
+      .catch( error => console.error(error.message))    
   }, [])
 
   useEffect(() => {
@@ -26,7 +28,7 @@ export const ProductsList = () => {
         )
         setProducts(filteredProducts)
       })
-      .catch( error => alert(error.message))
+      .catch( error => console.error(error.message))
   }, [search])
 
   const handleChangeSearch = (event) => {
@@ -49,6 +51,13 @@ export const ProductsList = () => {
             value={search}
             onChange={handleChangeSearch}
             fullWidth
+            InputLabelProps={{
+              style: { color: primary.contrastText },
+            }}
+            sx={{
+              background: background.paper,
+              color: "red",
+            }}
           />
         </Grid>
       </Grid>
@@ -63,7 +72,8 @@ export const ProductsList = () => {
             <Grid 
               key={product.id}
               item 
-              xs={6} md={4} lg={3}  
+              className="animate__animated animate__fadeIn"
+              xs={6} md={4} lg={3}
             >
               <ProductListItem product={product} />
             </Grid>

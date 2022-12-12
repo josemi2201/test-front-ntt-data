@@ -12,7 +12,7 @@ export const HeaderNavigation = () => {
   const { pathname } = useLocation()
 
   const handleClickLogo = () => {
-    navigate
+    navigate("/")
   }
 
   const handleClickPreviousPage = () => {

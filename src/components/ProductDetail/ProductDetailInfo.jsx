@@ -1,4 +1,4 @@
-import { Box, Chip, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { PropertyView } from '../UI/PropertyView';
@@ -6,24 +6,41 @@ import { PropertyView } from '../UI/PropertyView';
 export const ProductDetailInfo = ({product}) => {
 
   const {
-    description,
+    brand,
+    model,
     priceDescription,
+    processor,
+    ram,
+    so,
+    screenResolution,
+    battery,
+    cameras,
+    dimensions,
+    weight,
   } = product
+
+  const { palette: { secondary } } = useTheme()
 
   return (
     <Box>
       <Typography
         variant="h4"
       >
-        {description}
+        {model}
       </Typography>
-
-      <Chip 
-        label={priceDescription} 
-        color="primary"
-        size='medium'
-        sx={sx.priceChip}
-      />
+       <Typography
+        sx={{
+          color: secondary.light
+        }}
+      >
+        {brand}
+      </Typography>
+      <Typography 
+        variant="h5"
+        sx={sx.price}
+      >
+        {priceDescription}
+      </Typography>
 
       <Box component="hr" />
       <Box
@@ -31,39 +48,39 @@ export const ProductDetailInfo = ({product}) => {
       > 
         <PropertyView
           description="model"
-          value={""}
+          value={model}
         />
         <PropertyView
           description="processor"
-          value={""}
+          value={processor}
         />
         <PropertyView
           description="RAM"
-          value={""}
+          value={ram}
         />
         <PropertyView
           description="S.O."
-          value={""}
+          value={so}
         />
         <PropertyView
           description="screen resolution"
-          value={""}
+          value={screenResolution}
         />
         <PropertyView
           description="battery"
-          value={""}
+          value={battery}
         />
         <PropertyView
           description="cameras"
-          value={""}
+          value={cameras}
         />
         <PropertyView
           description="dimensions"
-          value={""}
+          value={dimensions}
         />
         <PropertyView
           description="weight"
-          value={""}
+          value={weight}
         />
       </Box>
     </Box>
@@ -71,8 +88,8 @@ export const ProductDetailInfo = ({product}) => {
 }
 
 const sx = {
-  priceChip: {
-    fontSize: '24px',
+  price: {
+    fontWeight: "bold"
   }
 }
 

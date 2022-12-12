@@ -23,6 +23,14 @@ export const Button = (props) => {
         <Icon path={icon} size={1} />
       }
       onClick={(event) => onClick && onClick(event)}
+      sx={{
+        fontWeight: 'bold',
+        boxShadow: 4,
+        '&:hover': {
+          backgroundColor: 'secondary.main',
+          color: 'secondary.contrastText',
+        }
+      }}
     >
       {text}
     </MuiButton>
