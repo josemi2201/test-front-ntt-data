@@ -1,7 +1,7 @@
 import React from 'react'
 import MuiIconButton from '@mui/material/IconButton'
 import { Badge, Tooltip, useTheme } from '@mui/material'
-import Icon from '@mdi/react'
+import { Icon } from '@mdi/react'
 import PropTypes from 'prop-types'
 
 export const IconButton = (props) => {

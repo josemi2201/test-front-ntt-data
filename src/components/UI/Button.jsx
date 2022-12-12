@@ -1,4 +1,4 @@
-import Icon from '@mdi/react';
+import { Icon } from '@mdi/react';
 import MuiButton from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
