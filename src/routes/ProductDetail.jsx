@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, useTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header/Header'
@@ -9,9 +9,10 @@ import { useData } from '../hooks/useData'
 
 export const ProductDetail = () => {
 
-  const { getProduct } = useData();
-
+  const { palette: { background } } = useTheme()
   const { id } = useParams()
+  const { getProduct } = useData();
+  
   const [product, setProduct] = useState({})
 
   const {
@@ -22,7 +23,7 @@ export const ProductDetail = () => {
   useEffect(() => {
     getProduct(id)
       .then( product => setProduct(product))
-      .catch( error => alert(error.message))
+      .catch( error => console.error(error.message))
   }, [])
 
   return (
@@ -42,6 +43,7 @@ export const ProductDetail = () => {
                 component="section"
                 >
                 <Box
+                  className='animate__animated animate__fadeIn'
                   component="img"
                   src={imgUrl}
                   sx={sx.img}
@@ -54,12 +56,18 @@ export const ProductDetail = () => {
                 component="section"
               >
                 <Box
-                  sx={sx.module}
+                  sx={{
+                    ...sx.module,
+                    backgroundColor: background.paper,
+                  }}
                 >
                   <ProductDetailInfo product={product} />
                 </Box>
                 <Box
-                  sx={sx.module}
+                  sx={{
+                    ...sx.module,
+                    backgroundColor: background.paper,
+                  }}
                 >
                   <ProductDetailActions product={product} />
                 </Box>
@@ -79,7 +87,7 @@ const sx = {
   },
   img: {
     width: "100%",
-    borderRadius: 2,
+    borderRadius: 1,
   },
   gridInfo: {
     display: "flex",
@@ -88,10 +96,9 @@ const sx = {
   },
   module:{
     border: "1px solid grey",
-    borderRadius: 2,
+    borderRadius: 1,
     margin: "0 32px",
     padding: `${PADDING_INFO}px`,
-    backgroundColor: "white",
   }
 }
 

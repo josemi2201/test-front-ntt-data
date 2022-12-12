@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 export const ProductListItem = ({product}) => {
 
-  const { id, description, priceDescription, imgUrl} = product
+  const { id, brand, model, description, priceDescription, imgUrl} = product
   
+  const { palette: { secondary } } = useTheme()
   const navigate = useNavigate();
 
   const handleClickProduct = () => {
@@ -26,10 +27,22 @@ export const ProductListItem = ({product}) => {
           src={imgUrl}
         />
         <CardContent>
-          <Typography>
-            {description}
+          <Typography
+            variant="h5"
+          >
+            {model}
           </Typography>
-          <Typography sx={sx.price}>
+          <Typography
+            sx={{
+              color: secondary.light
+            }}
+          >
+            {brand}
+          </Typography>
+          <Typography 
+            variant="h5"
+            sx={sx.price}
+          >
             {priceDescription}
           </Typography>
         </CardContent>
@@ -42,6 +55,7 @@ const sx = {
   card: {
     minHeight: "250px",
     cursor: "pointer",
+    borderRadius: "0px",
   },
   price: {
     fontWeight: "bold"

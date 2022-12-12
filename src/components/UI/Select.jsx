@@ -1,4 +1,4 @@
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useEffect } from 'react';
@@ -16,6 +16,8 @@ export const Select = (props) => {
   } = props
 
   const defaultValue = options.length === 1 ? options[0] : null
+
+  const { palette: { primary } } = useTheme()
 
   useEffect(() => {
 
@@ -51,6 +53,9 @@ export const Select = (props) => {
                 value={value}
                 error={ touched[name] && Boolean(errors[name]) }
                 helperText={ touched[name] && errors[name] }
+                InputLabelProps={{
+                  style: { color: primary.contrastText },
+                }}
             />
         }
     />
