@@ -2,6 +2,7 @@ import { Box, Grid, useTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header/Header'
+import { LoadingIcon } from '../components/UI/LoadingIcon'
 import { ProductDetailActions } from '../components/ProductDetail/ProductDetailActions'
 import { ProductDetailInfo } from '../components/ProductDetail/ProductDetailInfo'
 import { NotFound } from '../components/UI/NotFound'
@@ -14,7 +15,8 @@ export const ProductDetail = () => {
   const { getProduct } = useData();
   
   const [product, setProduct] = useState({})
-
+  const [isLoading, setIsLoading] = useState(true)
+  
   const {
     id: productId,
     imgUrl,
@@ -24,13 +26,14 @@ export const ProductDetail = () => {
     getProduct(id)
       .then( product => setProduct(product))
       .catch( error => console.error(error.message))
+      .finally(() => setIsLoading(false))
   }, [])
 
   return (
     <Header>
       {
         !productId 
-          ? <NotFound />
+          ? isLoading ? <LoadingIcon size={5}/> : <NotFound />
           : (
             <Grid
               container
