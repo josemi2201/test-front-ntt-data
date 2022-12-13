@@ -41,7 +41,7 @@ export const ProductDetail = () => {
             >
               <Grid
                 item
-                xs={6}
+                xs={12} sm={6}
                 sx={sx.contImg}
                 component="section"
                 >
@@ -54,7 +54,7 @@ export const ProductDetail = () => {
               </Grid>
               <Grid
                 item
-                xs={6}
+                xs={12} sm={6}
                 sx={sx.gridInfo}
                 component="section"
               >
@@ -82,8 +82,6 @@ export const ProductDetail = () => {
   )
 }
 
-const PADDING_INFO = 32
-
 const sx = {
   contProduct: {
     height: "100%",
@@ -100,8 +98,8 @@ const sx = {
   module:{
     border: "1px solid grey",
     borderRadius: 1,
-    margin: "0 32px",
-    padding: `${PADDING_INFO}px`,
+    margin: {xs:"0px", sm:"0 32px"},
+    padding: "32px",
   }
 }
 
