@@ -82,6 +82,8 @@ export const useData = () => {
   const addCart = async (data) => {
     const { data: dataResponse } = await testApi.post("/cart", data)
     setCartNumber(dataResponse.count)
+
+    return dataResponse
   }
 
   return {
