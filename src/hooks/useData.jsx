@@ -1,7 +1,8 @@
 import { useContext } from "react"
-import { testApi } from "../api/testApi"
+// import { testApi } from "../api/testApi"
 import { CartContext } from "../context/CartContext"
-import { getLocalStorage } from "../helpers/localStorage"
+import { productsDemoList } from "../data/demoData"
+import { getLocalStorage, setLocalStorage } from "../helpers/localStorage"
 import { getDiffBetweenDates } from "../helpers/time"
 
 const TIME_TO_UPDATE = 1
@@ -48,14 +49,34 @@ export const useData = () => {
 
   const getProducts = async () => {
     
-    const {updateAt, products: productsLocal} = getLocalStorage("vm-products", true)
+    const {
+      updateAt, 
+      products: productsLocal = []
+    } = getLocalStorage("vm-products", true)
     const diffHours = getDiffBetweenDates(updateAt, new Date(), TIME_OPERATOR)
-    const isExpiredDate = diffHours >= TIME_TO_UPDATE
+    const isExpiredDate = diffHours >= TIME_TO_UPDATE || !updateAt || productsLocal.length === 0
 
     if(isExpiredDate){
-      const response = await testApi.get("/product")
-      console.log(response);
-      return response.data.map(formatProduct)
+      //TODO: uncomment this lines when api is ready
+      // const response = await testApi.get("/product")
+      // const products = response.data
+
+      // setLocalStorage("vm-products", {
+      //   updateAt: new Date(),
+      //   products
+      // }, true)
+      
+      // return products
+
+      //TODO: remove this lines when api is ready
+      const products = productsDemoList.map(formatProduct)
+
+      setLocalStorage("vm-products", {
+        updateAt: new Date(),
+        products
+      }, true)
+
+      return products
     }
 
     return productsLocal.map(formatProduct)
@@ -63,14 +84,38 @@ export const useData = () => {
 
   const getProduct = async (id) => {
 
-    const {updateAt, productsDetails: productsDetailsLocal} = getLocalStorage("vm-productsDetails", true)
+    const {
+      updateAt, 
+      productsDetails: productsDetailsLocal = {}
+    } = getLocalStorage("vm-productsDetails", true)
     const diffHours = getDiffBetweenDates(updateAt, new Date(), TIME_OPERATOR)
-    const isExpiredDate = diffHours >= TIME_TO_UPDATE
+    const isExpiredDate = diffHours >= TIME_TO_UPDATE || !updateAt || !productsDetailsLocal[id]
 
     if(isExpiredDate){
-      const response = await testApi.get(`/product/${id}`)
+      //TODO: uncomment this lines when api is ready
+      // const response = await testApi.get(`/product/${id}`)
+      // const product = formatProductDetails(response.data)
 
-      return formatProductDetails(response.data)
+      // productsDetailsLocal[id] = product
+
+      // setLocalStorage("vm-productsDetails", {
+      //   updateAt: new Date(),
+      //   productsDetails: productsDetailsLocal
+      // }, true)
+
+      // return product
+      
+      //TODO: remove this lines when api is ready
+      const product = formatProductDetails(productsDemoList.filter((product) => product.id === id)[0])
+
+      productsDetailsLocal[id] = product
+
+      setLocalStorage("vm-productsDetails", {
+        updateAt: new Date(),
+        productsDetails: productsDetailsLocal
+      }, true)
+
+      return product
     }
 
     let product = productsDetailsLocal[id]
