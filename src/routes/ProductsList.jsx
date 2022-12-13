@@ -41,6 +41,7 @@ export const ProductsList = () => {
         container 
         sx={sx.contSearch}
         component="section"
+        spacing={1}
       >
         <Grid 
           item 
@@ -51,12 +52,11 @@ export const ProductsList = () => {
             value={search}
             onChange={handleChangeSearch}
             fullWidth
-            InputLabelProps={{
-              style: { color: primary.contrastText },
-            }}
             sx={{
               background: background.paper,
-              color: "red",
+              "& label.Mui-focused": {
+                color: primary.contrastText,
+              },
             }}
           />
         </Grid>

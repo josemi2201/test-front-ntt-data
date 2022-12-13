@@ -21,3 +21,7 @@ section{
 .animate__animated.animate__fadeIn{
   --animate-duration: 0.5s;
 }
+
+.MuiInputLabel-root.Mui-focused{
+  color: #666;
+}
