@@ -20,11 +20,11 @@ export const HeaderBreadcrumbs = () => {
   }, [location])
   
   const getDescriptions = async (paths) => {
-    if(paths[0] === 'product'){
+    if(paths[0] === 'product' && paths[1]){
       const { description } = await getProduct(paths[1])
       paths[1] = description
-      setPathsDescriptions(paths)
     }
+    setPathsDescriptions(paths)
   }
   
   const getPathBreadcrumbs = (index) => {
