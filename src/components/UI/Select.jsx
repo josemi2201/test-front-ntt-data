@@ -1,7 +1,6 @@
 import { Autocomplete, TextField, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export const Select = (props) => {
 
@@ -27,7 +26,6 @@ export const Select = (props) => {
     
   }, [])
   
-
   return (
     <Autocomplete
         disablePortal

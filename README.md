@@ -1,6 +1,13 @@
 # test-front-ntt-data
 Test Front hecho en react para prueba tecnica de NTT DATA
 
+# Despliegue
+La aplicacion esta deplegada en netlify y se puede visitar con este enlace, dispone de integracion continua cada vez que se hacer un merge en la rama main
+
+```https://test-front-ntt-data.netlify.app/```
+
+
+
 # Requisitos 
 Esta prueba consiste en la creación de una mini-aplicación para comprar dispositivos moviles.
 - La aplicación tendrá únicamente dos vistas:
