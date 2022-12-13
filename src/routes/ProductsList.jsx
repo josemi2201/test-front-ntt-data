@@ -41,22 +41,22 @@ export const ProductsList = () => {
         container 
         sx={sx.contSearch}
         component="section"
+        spacing={1}
       >
         <Grid 
           item 
-          xs={6} md={3} lg={2}
+          xs={12} md={3} lg={2}
         >
           <TextField
             label="Search"
             value={search}
             onChange={handleChangeSearch}
             fullWidth
-            InputLabelProps={{
-              style: { color: primary.contrastText },
-            }}
             sx={{
               background: background.paper,
-              color: "red",
+              "& label.Mui-focused": {
+                color: primary.contrastText,
+              },
             }}
           />
         </Grid>
@@ -73,7 +73,7 @@ export const ProductsList = () => {
               key={product.id}
               item 
               className="animate__animated animate__fadeIn"
-              xs={6} md={4} lg={3}
+              xs={12} md={4} lg={3}
             >
               <ProductListItem product={product} />
             </Grid>

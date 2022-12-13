@@ -20,11 +20,15 @@ export const HeaderBreadcrumbs = () => {
   }, [location])
   
   const getDescriptions = async (paths) => {
-    if(paths[0] === 'product'){
-      const { description } = await getProduct(paths[1])
-      paths[1] = description
-      setPathsDescriptions(paths)
+    if(paths[0] === 'product' && paths[1]){
+      try {
+        const { description } = await getProduct(paths[1])
+        paths[1] = description
+      } catch (error) {
+        paths[1] = "Not-found"
+      }
     }
+    setPathsDescriptions(paths)
   }
   
   const getPathBreadcrumbs = (index) => {
@@ -54,6 +58,9 @@ export const HeaderBreadcrumbs = () => {
           >
             <Link
               to={getPathBreadcrumbs(index)}
+              style={{
+                pointerEvents: pathsDescriptions[index] === "Not-found" ? "none" : "auto",
+              }}
             >
               {pathsDescriptions[index]}
             </Link>

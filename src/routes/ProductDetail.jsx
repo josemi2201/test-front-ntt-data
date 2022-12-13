@@ -2,6 +2,7 @@ import { Box, Grid, useTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header/Header'
+import { LoadingIcon } from '../components/UI/LoadingIcon'
 import { ProductDetailActions } from '../components/ProductDetail/ProductDetailActions'
 import { ProductDetailInfo } from '../components/ProductDetail/ProductDetailInfo'
 import { NotFound } from '../components/UI/NotFound'
@@ -14,7 +15,8 @@ export const ProductDetail = () => {
   const { getProduct } = useData();
   
   const [product, setProduct] = useState({})
-
+  const [isLoading, setIsLoading] = useState(true)
+  
   const {
     id: productId,
     imgUrl,
@@ -24,13 +26,14 @@ export const ProductDetail = () => {
     getProduct(id)
       .then( product => setProduct(product))
       .catch( error => console.error(error.message))
+      .finally(() => setIsLoading(false))
   }, [])
 
   return (
     <Header>
       {
         !productId 
-          ? <NotFound />
+          ? isLoading ? <LoadingIcon size={5}/> : <NotFound />
           : (
             <Grid
               container
@@ -38,7 +41,7 @@ export const ProductDetail = () => {
             >
               <Grid
                 item
-                xs={6}
+                xs={12} sm={6}
                 sx={sx.contImg}
                 component="section"
                 >
@@ -51,7 +54,7 @@ export const ProductDetail = () => {
               </Grid>
               <Grid
                 item
-                xs={6}
+                xs={12} sm={6}
                 sx={sx.gridInfo}
                 component="section"
               >
@@ -79,8 +82,6 @@ export const ProductDetail = () => {
   )
 }
 
-const PADDING_INFO = 32
-
 const sx = {
   contProduct: {
     height: "100%",
@@ -97,8 +98,8 @@ const sx = {
   module:{
     border: "1px solid grey",
     borderRadius: 1,
-    margin: "0 32px",
-    padding: `${PADDING_INFO}px`,
+    margin: {xs:"0px", sm:"0 32px"},
+    padding: "32px",
   }
 }
 
