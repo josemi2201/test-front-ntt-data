@@ -17,7 +17,7 @@ export const ProductListItem = ({product}) => {
 
   return (
     <Box>
-      <Card 
+      <Card
         sx={sx.card}
         onClick={handleClickProduct}
       >
@@ -25,6 +25,11 @@ export const ProductListItem = ({product}) => {
           component="img"
           alt={description}
           src={imgUrl}
+          sx={sx.img}
+          onError={({target}) => {
+            target.onError = null;
+            target.src = "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg"
+          }}
         />
         <CardContent>
           <Typography
@@ -56,6 +61,9 @@ const sx = {
     minHeight: "250px",
     cursor: "pointer",
     borderRadius: "0px",
+  },
+  img: {
+    height: "274px",  
   },
   price: {
     fontWeight: "bold"

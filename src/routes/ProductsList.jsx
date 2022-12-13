@@ -44,7 +44,7 @@ export const ProductsList = () => {
       >
         <Grid 
           item 
-          xs={6} md={3} lg={2}
+          xs={12} md={3} lg={2}
         >
           <TextField
             label="Search"
@@ -73,7 +73,7 @@ export const ProductsList = () => {
               key={product.id}
               item 
               className="animate__animated animate__fadeIn"
-              xs={6} md={4} lg={3}
+              xs={12} md={4} lg={3}
             >
               <ProductListItem product={product} />
             </Grid>

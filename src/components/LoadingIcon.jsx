@@ -5,30 +5,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 
-export const LoadingIcon = ({spin = 0.7}) => {
+export const LoadingIcon = ({spin = 0.7, size = 1}) => {
 
-  const { palette: {primary}} = useTheme()
+  const { palette: {secondary}} = useTheme()
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
-        padding: 60,
-      }}
+      sx={sx.cont}
     >
       <Icon 
           path={mdiLoading} 
-          // size={size} 
-          color={primary.main}
+          size={size} 
+          color={secondary.main}
           spin={spin}
           
       />
     </Box>
   )
+}
+
+const sx = {
+  cont: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
 }
 
 LoadingIcon.propTypes = {
