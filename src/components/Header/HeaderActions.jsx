@@ -9,7 +9,7 @@ export const HeaderActions = () => {
   const { cartNumber } = useContext(CartContext)
   
   const handleClickCart = () => {
-    alert('Cart clicked')
+    
   }
 
   return (

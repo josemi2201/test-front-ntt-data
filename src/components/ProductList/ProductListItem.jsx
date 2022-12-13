@@ -1,5 +1,4 @@
-import { Card, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, Card, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
