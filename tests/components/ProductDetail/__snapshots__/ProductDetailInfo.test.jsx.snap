@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-0"
+  >
+    <h4
+      class="MuiTypography-root MuiTypography-h4 css-5lbw0b-MuiTypography-root"
+    >
+      Flash (2017)
+    </h4>
+    <p
+      class="MuiTypography-root MuiTypography-body1 css-sc70jj-MuiTypography-root"
+    >
+      alcatel
+    </p>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-bezmlo-MuiTypography-root"
+    />
+    <hr
+      class="MuiBox-root css-0"
+    />
+    <ul
+      class="MuiBox-root css-0"
+    >
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            model
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            Flash (2017)
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            processor
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            MediaTek MT8735
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            RAM
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            16GB | 32GB | 64GB
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            S.O.
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            Android 10
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            screen resolution
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            1280x720
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            battery
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            3.400mAh
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            cameras
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            13MP | 5MP
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            dimensions
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            99,8 mm / 190 mm / 8,5 mm
+          </p>
+        </div>
+      </li>
+      <li
+        class="MuiBox-root css-0"
+      >
+        <div
+          class="MuiBox-root css-k008qs"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+          >
+            weight
+            :
+          </p>
+          <p
+            class="MuiTypography-root MuiTypography-body1 css-yyvcc2-MuiTypography-root"
+          >
+            275 g
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

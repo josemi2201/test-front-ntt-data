@@ -45,27 +45,32 @@ export const useData = () => {
   const getProduct = async (id) => {
 
     const {
-      updateAt, 
       productsDetails: productsDetailsLocal = {}
     } = getLocalStorage("vm-productsDetails", true)
+    
+    let product = productsDetailsLocal[id]
+    let updateAt = product ? product.updateAt : null
+
     const diffHours = getDiffBetweenDates(updateAt, new Date(), TIME_OPERATOR)
     const isExpiredDate = diffHours >= TIME_TO_UPDATE || !updateAt || !productsDetailsLocal[id]
 
     if(isExpiredDate){
       const { data } = await testApi.get(`/product/${id}`)
-      const product = formatProduct(data)
+
+      const product = {
+        ...formatProduct(data),
+        updateAt: new Date()
+      }
 
       productsDetailsLocal[id] = product
 
       setLocalStorage("vm-productsDetails", {
-        updateAt: new Date(),
         productsDetails: productsDetailsLocal
       }, true)
 
       return product
     }
 
-    let product = productsDetailsLocal[id]
 
     if (!product) {
       return {}
@@ -77,6 +82,8 @@ export const useData = () => {
   const addCart = async (data) => {
     const { data: dataResponse } = await testApi.post("/cart", data)
     setCartNumber(dataResponse.count)
+
+    return dataResponse
   }
 
   return {

@@ -33,6 +33,7 @@ export const Select = (props) => {
         options={options}
         defaultValue={defaultValue}
         getOptionLabel={(option) => option.label}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         onChange={(event, newValue) => {
             const newValueForm = {
                 target: { name, value: "" }
