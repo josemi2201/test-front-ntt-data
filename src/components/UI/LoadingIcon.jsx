@@ -1,5 +1,5 @@
 import { mdiLoading } from '@mdi/js';
-import Icon from '@mdi/react';
+import { Icon } from '@mdi/react';
 import { Box, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
