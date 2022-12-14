@@ -1,7 +1,10 @@
 import { Icon } from '@mdi/react';
+import { useTheme } from '@mui/material';
 import MuiButton from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { LoadingIcon } from './LoadingIcon';
+
 
 export const Button = (props) => {
 
@@ -12,7 +15,10 @@ export const Button = (props) => {
     icon = "",
     text = "",
     onClick,
+    isLoading = false,
   } = props
+
+  const { palette: { primary } } = useTheme();
   
   return (
     <MuiButton 
@@ -20,7 +26,7 @@ export const Button = (props) => {
       variant={variant}
       color={color}
       startIcon={
-        <Icon path={icon} size={1} />
+        isLoading ? <LoadingIcon /> : <Icon path={icon} size={1} />
       }
       onClick={(event) => onClick && onClick(event)}
       sx={{
@@ -29,8 +35,12 @@ export const Button = (props) => {
         '&:hover': {
           backgroundColor: 'secondary.main',
           color: 'secondary.contrastText',
+          "& .MuiButton-startIcon path": {
+            fill: `${primary.main} !important`,
+          }
         }
       }}
+      disabled={isLoading}
     >
       {text}
     </MuiButton>
@@ -41,7 +51,11 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit']),
   variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
   color: PropTypes.oneOf(['primary', 'secondary', 'success', 'error', 'info', 'warning', 'inherit']),
-  icon: PropTypes.string,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+  ]),
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  isLoading: PropTypes.bool,
 }

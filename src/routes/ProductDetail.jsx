@@ -2,10 +2,11 @@ import { Box, Grid, useTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header/Header'
-import { LoadingIcon } from '../components/UI/LoadingIcon'
 import { ProductDetailActions } from '../components/ProductDetail/ProductDetailActions'
 import { ProductDetailInfo } from '../components/ProductDetail/ProductDetailInfo'
+import { LoadingIcon } from '../components/UI/LoadingIcon'
 import { NotFound } from '../components/UI/NotFound'
+import { showToast } from '../helpers/toast'
 import { useData } from '../hooks/useData'
 
 export const ProductDetail = () => {
@@ -25,7 +26,7 @@ export const ProductDetail = () => {
   useEffect(() => {
     getProduct(id)
       .then( product => setProduct(product))
-      .catch( error => console.error(error.message))
+      .catch( error => showToast(error.message, "error"))
       .finally(() => setIsLoading(false))
   }, [])
 

@@ -1,5 +1,5 @@
 import { Icon } from '@mdi/react'
-import { Badge, Tooltip, useTheme } from '@mui/material'
+import { Badge, Box, Tooltip, useTheme } from '@mui/material'
 import MuiIconButton from '@mui/material/IconButton'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -26,26 +26,28 @@ export const IconButton = (props) => {
     <Tooltip
       title={tooltip}
     >
-      <MuiIconButton
-        onClick={onClick} 
-      >
-        <Badge 
-          invisible={!haveBadge}
-          badgeContent={badgeContent} 
-          color={newColorBadge}
-          showZero
+      <Box>
+        <MuiIconButton
+          onClick={(e) => onClick && onClick(e)}
+          disabled={!onClick}
         >
-          <Icon 
-            path={icon} 
-            size={size} 
-            color={iconColor}
-            />
-        </Badge>
-      </MuiIconButton>
+          <Badge 
+            invisible={!haveBadge}
+            badgeContent={badgeContent} 
+            color={newColorBadge}
+            showZero
+          >
+            <Icon 
+              path={icon} 
+              size={size} 
+              color={iconColor}
+              />
+          </Badge>
+        </MuiIconButton>
+      </Box>
     </Tooltip>
   )
 }
-
 
 IconButton.propTypes = {
   icon: PropTypes.string.isRequired,
@@ -55,5 +57,5 @@ IconButton.propTypes = {
   badgeContent: PropTypes.number,
   colorBadge: PropTypes.oneOf(['primary', 'secondary', 'error', 'info', 'success', 'warning']),
   tooltip: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 }

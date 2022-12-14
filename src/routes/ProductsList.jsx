@@ -1,8 +1,9 @@
 import { useTheme } from '@emotion/react';
 import { Grid, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Header } from '../components/Header/Header';
 import { ProductListItem } from '../components/ProductList/ProductListItem';
+import { showToast } from '../helpers/toast';
 import { useData } from '../hooks/useData';
 
 export const ProductsList = () => {
@@ -12,15 +13,16 @@ export const ProductsList = () => {
 
   const [products, setProducts] = useState([])
   const [search, setSearch] = useState('')
-
+  const isFirstRender = useRef(true)
   useEffect(() => {
     getProducts()
       .then( products => setProducts(products))
-      .catch( error => console.error(error.message))    
+      .catch( error => showToast(error.message, "error"))
+      .finally(() => isFirstRender.current = false)
   }, [])
 
   useEffect(() => {
-    getProducts()
+    !isFirstRender && getProducts()
       .then( products => {
         const filteredProducts = products.filter(product => 
           (product.brand && product.brand.toLowerCase().includes(search.toLowerCase())) ||
@@ -28,7 +30,7 @@ export const ProductsList = () => {
         )
         setProducts(filteredProducts)
       })
-      .catch( error => console.error(error.message))
+      .catch( error => showToast(error.message, "error"))
   }, [search])
 
   const handleChangeSearch = (event) => {

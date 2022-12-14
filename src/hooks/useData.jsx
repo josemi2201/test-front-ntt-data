@@ -20,6 +20,7 @@ export const useData = () => {
   const { setCartNumber } = useContext(CartContext)
 
   const getProducts = async () => {
+    
     const {
       updateAt, 
       products: productsLocal = []
