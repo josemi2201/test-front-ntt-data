@@ -22,7 +22,7 @@ export const ProductsList = () => {
   }, [])
 
   useEffect(() => {
-    !isFirstRender && getProducts()
+    (!isFirstRender || search) && getProducts()
       .then( products => {
         const filteredProducts = products.filter(product => 
           (product.brand && product.brand.toLowerCase().includes(search.toLowerCase())) ||
