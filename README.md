@@ -1,12 +1,17 @@
 # test-front-ntt-data
-Test Front hecho en react para prueba tecnica de NTT DATA
+Test Front hecho en react para prueba técnica de NTT DATA
 
 # Despliegue
-La aplicacion esta deplegada en netlify y se puede visitar con este enlace, dispone de integracion continua cada vez que se hacer un merge en la rama main
+La aplicación esta desplegada en netlify y se puede visitar con este enlace, dispone de integración continua cada vez que se hacer un merge en la rama main
 
-```https://test-front-ntt-data.netlify.app/```
+[https://test-front-ntt-data.netlify.app/](https://test-front-ntt-data.netlify.app/)
 
+# Backend
+Debido a los fallos con la webapi facilitada para la prueba, se ha realizado un backend en node con express, continue datos mockeados y cumplen los mismos requisitos que la api principal.
 
+El repositorio es: [https://github.com/josemi2201/backend-test-front-ntt-data](https://github.com/josemi2201/backend-test-front-ntt-data)
+
+También dispone de integración continua con netlify, su url es: [https://backend-test-front-ntt-data.netlify.app](https://backend-test-front-ntt-data.netlify.app)
 
 # Requisitos 
 Esta prueba consiste en la creación de una mini-aplicación para comprar dispositivos moviles.

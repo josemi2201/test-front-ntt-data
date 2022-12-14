@@ -4,9 +4,11 @@ import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
 import * as yup from 'yup';
+import { showToast } from '../../helpers/toast';
 import { useData } from '../../hooks/useData';
 import { Button } from '../UI/Button';
 import { Select } from '../UI/Select';
+
 
 const validationSchema = yup.object({
   storageCode: yup
@@ -21,22 +23,26 @@ export const ProductDetailActions = ({product}) => {
 
   const { addCart } = useData();
   
-  const { values, errors, touched, handleSubmit, handleChange } = useFormik({
+  const { values, errors, touched, isSubmitting, handleSubmit, handleChange } = useFormik({
     initialValues: {
       storageCode: '',
       colorCode: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
         try {    
             const data = {
               id: product.id,
               ...values,
             }
 
-            addCart(data)
+            await addCart(data)
+
+            setSubmitting(false)
+            
+            showToast("Product added to cart", "success")
         } catch (error) {
-          console.error(error.message)
+          showToast(error.message, "error")
         }
     },
   });
@@ -78,6 +84,7 @@ export const ProductDetailActions = ({product}) => {
             icon={mdiCartArrowDown}
             text="Add to cart"
             type="submit"
+            isLoading={isSubmitting}
           />
         </Box>
       </Box>

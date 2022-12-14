@@ -8,17 +8,12 @@ export const HeaderActions = () => {
 
   const { cartNumber } = useContext(CartContext)
   
-  const handleClickCart = () => {
-    
-  }
-
   return (
     <Box
       sx={sx.headerActions}
     >
       <IconButton
         icon={mdiCart}
-        onClick={handleClickCart}
         haveBadge
         badgeContent={cartNumber}
         tooltip={`Total items in cart: ${cartNumber}`}
