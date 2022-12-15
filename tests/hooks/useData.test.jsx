@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import { CartProvider } from '../../src/context/CartContext';
 import { useData } from '../../src/hooks/useData';
 
@@ -42,8 +43,12 @@ describe('Test hook useData', () => {
           colorCode: 1,
           storageCode: 2
       }
-      const res = await addCart(data);
-    
+
+      let res
+      await act(async() => {
+        res = await addCart(data);
+      });
+
       expect(res.count).toBeTruthy();
 
       expect(res.count).toBeGreaterThan(0);
