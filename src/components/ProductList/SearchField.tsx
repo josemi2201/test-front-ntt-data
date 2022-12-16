@@ -12,7 +12,6 @@ export const SearchField = ({isFirstRender, setProducts}) => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    debugger
     (!isFirstRender) && getProducts()
       .then( products => {
         const filteredProducts = products.filter(product => 
