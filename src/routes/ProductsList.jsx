@@ -1,41 +1,24 @@
-import { useTheme } from '@emotion/react';
-import { Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { Header } from '../components/Header/Header';
 import { ProductListItem } from '../components/ProductList/ProductListItem';
+import { SearchField } from '../components/ProductList/SearchField';
 import { showToast } from '../helpers/toast';
 import { useData } from '../hooks/useData';
 
 export const ProductsList = () => {
   
-  const { palette: { background, primary } } = useTheme()
   const { getProducts } = useData();
 
   const [products, setProducts] = useState([])
-  const [search, setSearch] = useState('')
   const isFirstRender = useRef(true)
+
   useEffect(() => {
     getProducts()
       .then( products => setProducts(products))
       .catch( error => showToast(error.message, "error"))
       .finally(() => isFirstRender.current = false)
   }, [])
-
-  useEffect(() => {
-    (!isFirstRender.current) && getProducts()
-      .then( products => {
-        const filteredProducts = products.filter(product => 
-          (product.brand && product.brand.toLowerCase().includes(search.toLowerCase())) ||
-          (product.model && product.model.toLowerCase().includes(search.toLowerCase()))
-        )
-        setProducts(filteredProducts)
-      })
-      .catch( error => showToast(error.message, "error"))
-  }, [search])
-
-  const handleChangeSearch = (event) => {
-    setSearch(event.target.value)
-  }
 
   return (
     <Header>
@@ -49,17 +32,9 @@ export const ProductsList = () => {
           item 
           xs={12} md={3} lg={2}
         >
-          <TextField
-            label="Search"
-            value={search}
-            onChange={handleChangeSearch}
-            fullWidth
-            sx={{
-              background: background.paper,
-              "& label.Mui-focused": {
-                color: primary.contrastText,
-              },
-            }}
+          <SearchField 
+            isFirstRender={isFirstRender.current}
+            setProducts={setProducts}
           />
         </Grid>
       </Grid>
@@ -70,9 +45,9 @@ export const ProductsList = () => {
         sx={sx.contProducts}
       >
         {
-          products.map(product => (
+          products.map((product, index) => (
             <Grid 
-              key={product.id}
+              key={product.id + index}
               item 
               className="animate__animated animate__fadeIn"
               xs={12} md={4} lg={3}
