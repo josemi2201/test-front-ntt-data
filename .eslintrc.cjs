@@ -50,6 +50,18 @@ module.exports = {
       "no-ternary": "off",
       "function-call-argument-newline": "off",
       "no-extra-parens": "off",
-      "require-atomic-updates": "off"
+      "require-atomic-updates": "off",
+      "react/function-component-definition": "off",
+      "func-style": "off",
+      "react/jsx-newline": "off",
+      "react\jsx-no-leaked-render": "off",
+      "react/jsx-no-bind" : "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/jsx-no-leaked-render": "off",
+      "react/forbid-prop-types": "off",
+      "react/jsx-max-depth": "off",
+      "react/forbid-component-props": "off",
+      "react/jsx-no-constructed-context-values": "off",
+      "react/no-array-index-key": "off",
     }
 }

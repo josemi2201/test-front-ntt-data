@@ -42,52 +42,53 @@ export const ProductDetailPage = () => {
     <Header>
       {
         (productId && !isLoading) &&
-        <Grid
-          container
-          sx={sx.contProduct}
-        >
           <Grid
-            item
-            xs={12} sm={6}
-            sx={sx.contImg}
-            component="section"
+            container
+            sx={sx.contProduct}
           >
-            <Box
-              className="animate__animated animate__fadeIn"
-              component="img"
-              src={imgUrl}
-              sx={sx.img}
-            />
-          </Grid>
-          <Grid
-            item
-            xs={12} sm={6}
-            sx={sx.gridInfo}
-            component="section"
-          >
-            <Box
-              sx={{
-                ...sx.module,
-                backgroundColor: background.paper
-              }}
+            <Grid
+              component="section"
+              item
+              sm={6}
+              sx={sx.contImg}
+              xs={12}
             >
-              <ProductDetailInfo product={product} />
-            </Box>
-            <Box
-              sx={{
-                ...sx.module,
-                backgroundColor: background.paper
-              }}
+              <Box
+                className="animate__animated animate__fadeIn"
+                component="img"
+                src={imgUrl}
+                sx={sx.img}
+              />
+            </Grid>
+            <Grid
+              component="section"
+              item
+              sm={6}
+              sx={sx.gridInfo}
+              xs={12}
             >
-              <ProductDetailActions product={product} />
-            </Box>
+              <Box
+                sx={{
+                  ...sx.module,
+                  backgroundColor: background.paper
+                }}
+              >
+                <ProductDetailInfo product={product} />
+              </Box>
+              <Box
+                sx={{
+                  ...sx.module,
+                  backgroundColor: background.paper
+                }}
+              >
+                <ProductDetailActions product={product} />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-
       }
       {
         isLoading
-          ? <LoadingIcon size={5}/>
+          ? <LoadingIcon size={5} />
           : !productId && <NotFound />
       }
     </Header>

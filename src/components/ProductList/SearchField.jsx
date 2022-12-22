@@ -42,16 +42,16 @@ export const SearchField = ({isFirstRender, setProducts}) => {
 
   return (
     <TextField
-      label="Search"
-      value={search}
-      onChange={handleChangeSearch}
       fullWidth
+      label="Search"
+      onChange={handleChangeSearch}
       sx={{
         "& label.Mui-focused": {
           color: primary.contrastText
         },
         background: background.paper
       }}
+      value={search}
     />
   );
 

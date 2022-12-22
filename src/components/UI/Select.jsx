@@ -38,14 +38,13 @@ export const Select = (props) => {
 
   return (
     <Autocomplete
-      disablePortal
-      name={name}
-      options={options}
       defaultValue={defaultValue}
+      disablePortal
       getOptionLabel={(option) => option.label}
       isOptionEqualToValue={
         (option, valueToCompare) => option.id === valueToCompare.id
       }
+      name={name}
       onChange={(event, newValue) => {
 
         const newValueForm = {target: {
@@ -62,17 +61,19 @@ export const Select = (props) => {
         handleChange(newValueForm);
 
       }}
-      renderInput={(params) => <TextField
-        {...params}
-        label={label}
-        value={value}
-        error={ touched[name] && Boolean(errors[name]) }
-        helperText={ touched[name] && errors[name] }
-        InputLabelProps={{
-          style: { color: primary.contrastText }
-        }}
-      />
-      }
+      options={options}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          InputLabelProps={{
+            style: { color: primary.contrastText }
+          }}
+          error={touched[name] && Boolean(errors[name])}
+          helperText={touched[name] && errors[name]}
+          label={label}
+          value={value}
+        />
+      )}
     />
   );
 

@@ -13,9 +13,9 @@ export const HeaderActions = () => {
       sx={sx.headerActions}
     >
       <IconButton
-        icon={mdiCart}
-        haveBadge
         badgeContent={cartNumber}
+        haveBadge
+        icon={mdiCart}
         tooltip={`Total items in cart: ${cartNumber}`}
       />
     </Box>

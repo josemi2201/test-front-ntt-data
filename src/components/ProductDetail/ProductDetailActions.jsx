@@ -9,6 +9,8 @@ import { useCart } from "../../hooks/useCart";
 import { Button } from "../UI/Button";
 import { Select } from "../UI/Select";
 
+const TITLE_MODULE = "Options";
+
 const validationSchema = yup.object({
   colorCode: yup.
     string().
@@ -69,10 +71,10 @@ export const ProductDetailActions = ({product}) => {
   return (
     <Box>
       <Typography
-        variant="h4"
         sx={sx.title}
+        variant="h4"
       >
-        Options
+        {TITLE_MODULE}
       </Typography>
       <Box component="hr" />
       <Box>
@@ -82,28 +84,28 @@ export const ProductDetailActions = ({product}) => {
           sx={sx.form}
         >
           <Select
+            errors={errors}
+            handleChange={handleChange}
             label="Storage"
             name="storageCode"
             options={product.storages}
-            value={values.storageCode}
-            handleChange={handleChange}
             touched={touched}
-            errors={errors}
+            value={values.storageCode}
           />
           <Select
+            errors={errors}
+            handleChange={handleChange}
             label="Color"
             name="colorCode"
             options={product.colors}
-            value={values.colorCode}
-            handleChange={handleChange}
             touched={touched}
-            errors={errors}
+            value={values.colorCode}
           />
           <Button
             icon={mdiCartArrowDown}
+            isLoading={isSubmitting}
             text="Add to cart"
             type="submit"
-            isLoading={isSubmitting}
           />
         </Box>
       </Box>

@@ -10,13 +10,13 @@ const DEFAULT_BADGE = 0;
 export const IconButton = (props) => {
 
   const {
-    badgeContent = DEFAULT_BADGE,
+    badgeContent,
     color,
     colorBadge,
-    haveBadge = false,
+    haveBadge,
     icon,
     onClick,
-    size = DEFAULT_SIZE,
+    size,
     tooltip = ""
   } = props;
 
@@ -26,29 +26,25 @@ export const IconButton = (props) => {
     ? color
     : primary.contrastText;
 
-  const newColorBadge = colorBadge
-    ? colorBadge
-    : "secondary";
-
   return (
     <Tooltip
       title={tooltip}
     >
       <Box>
         <MuiIconButton
-          onClick={(event) => onClick && onClick(event)}
           disabled={!onClick}
+          onClick={(event) => onClick && onClick(event)}
         >
           <Badge
-            invisible={!haveBadge}
             badgeContent={badgeContent}
-            color={newColorBadge}
+            color={colorBadge}
+            invisible={!haveBadge}
             showZero
           >
             <Icon
+              color={iconColor}
               path={icon}
               size={size}
-              color={iconColor}
             />
           </Badge>
         </MuiIconButton>
@@ -74,4 +70,14 @@ IconButton.propTypes = {
   onClick: PropTypes.func,
   size: PropTypes.number,
   tooltip: PropTypes.string
+};
+
+IconButton.defaultProps = {
+  badgeContent: DEFAULT_BADGE,
+  color: "",
+  colorBadge: "secondary",
+  haveBadge: false,
+  onClick: null,
+  size: DEFAULT_SIZE,
+  tooltip: ""
 };

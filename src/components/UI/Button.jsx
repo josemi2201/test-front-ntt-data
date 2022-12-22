@@ -8,28 +8,32 @@ import { LoadingIcon } from "./LoadingIcon";
 export const Button = (props) => {
 
   const {
-    color = "primary",
-    icon = "",
-    isLoading = false,
+    color,
+    icon,
+    isLoading,
     onClick,
-    text = "",
-    type = "button",
-    variant = "contained"
+    text,
+    type,
+    variant
   } = props;
 
   const { palette: { primary } } = useTheme();
 
   return (
     <MuiButton
-      type={type}
-      variant={variant}
       color={color}
+      disabled={isLoading}
+      onClick={(event) => onClick && onClick(event)}
       startIcon={
         isLoading
           ? <LoadingIcon />
-          : <Icon path={icon} size={1} />
+          : (
+            <Icon
+              path={icon}
+              size={1}
+            />
+          )
       }
-      onClick={(event) => onClick && onClick(event)}
       sx={{
         "&:hover": {
           "& .MuiButton-startIcon path": {
@@ -41,7 +45,8 @@ export const Button = (props) => {
         boxShadow: 4,
         fontWeight: "bold"
       }}
-      disabled={isLoading}
+      type={type}
+      variant={variant}
     >
       {text}
     </MuiButton>
@@ -75,4 +80,13 @@ Button.propTypes = {
     "outlined",
     "text"
   ])
+};
+
+Button.defaultProps = {
+  color: "primary",
+  icon: "",
+  isLoading: false,
+  onClick: null,
+  type: "button",
+  variant: "contained"
 };

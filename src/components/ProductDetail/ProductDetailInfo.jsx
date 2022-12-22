@@ -36,8 +36,8 @@ export const ProductDetailInfo = ({product}) => {
         {brand}
       </Typography>
       <Typography
-        variant="h5"
         sx={sx.price}
+        variant="h5"
       >
         {priceDescription}
       </Typography>

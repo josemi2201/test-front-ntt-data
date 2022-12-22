@@ -33,7 +33,8 @@ export const HeaderNavigation = () => {
         <Avatar src={logoImg} />
       </MuiIconButton>
       {
-        pathname !== "/product" && <IconButton
+        pathname !== "/product" &&
+        <IconButton
           icon={mdiArrowLeft}
           onClick={handleClickPreviousPage}
           size={1.3}

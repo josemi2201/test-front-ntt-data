@@ -56,34 +56,35 @@ export const HeaderBreadcrumbs = () => {
   return (
     <Breadcrumbs color={primary.contrastText}>
       {
-        paths.map((path, index) => <Box
-          key={index}
-          sx={{
-            "& > a": {
-              color: primary.contrastText,
-              textDecoration: "none"
-            },
-            "& > a:hover": {
-              backgroundColor: secondary.main,
-              color: secondary.contrastText,
-              paddingBottom: "4px",
-              paddingTop: "4px",
-              textDecoration: "underline"
-            }
-          }}
-        >
-          <Link
-            to={getPathBreadcrumbs(index)}
-            style={{
-              pointerEvents: pathsDescriptions[index] === "Not-found"
-                ? "none"
-                : "auto"
+        paths.map((path, index) => (
+          <Box
+            key={index}
+            sx={{
+              "& > a": {
+                color: primary.contrastText,
+                textDecoration: "none"
+              },
+              "& > a:hover": {
+                backgroundColor: secondary.main,
+                color: secondary.contrastText,
+                paddingBottom: "4px",
+                paddingTop: "4px",
+                textDecoration: "underline"
+              }
             }}
           >
-            {pathsDescriptions[index]}
-          </Link>
-        </Box>
-        )
+            <Link
+              style={{
+                pointerEvents: pathsDescriptions[index] === "Not-found"
+                  ? "none"
+                  : "auto"
+              }}
+              to={getPathBreadcrumbs(index)}
+            >
+              {pathsDescriptions[index]}
+            </Link>
+          </Box>
+        ))
       }
     </Breadcrumbs>
   );

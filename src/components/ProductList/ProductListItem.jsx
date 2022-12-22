@@ -36,14 +36,12 @@ export const ProductListItem = ({product}) => {
   return (
     <Box>
       <Card
-        sx={sx.card}
         onClick={handleClickProduct}
+        sx={sx.card}
       >
         <CardMedia
-          component="img"
           alt={description}
-          src={imgUrl}
-          sx={sx.img}
+          component="img"
           loading="lazy"
           onError={({target}) => {
 
@@ -51,6 +49,8 @@ export const ProductListItem = ({product}) => {
             target.src = DEFAULT_IMAGE;
 
           }}
+          src={imgUrl}
+          sx={sx.img}
         />
         <CardContent>
           <Typography
@@ -66,8 +66,8 @@ export const ProductListItem = ({product}) => {
             {brand}
           </Typography>
           <Typography
-            variant="h5"
             sx={sx.price}
+            variant="h5"
           >
             {priceDescription}
           </Typography>

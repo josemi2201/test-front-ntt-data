@@ -7,7 +7,7 @@ import React from "react";
 const DEFAULT_SPIN = 0.7;
 const DEFAULT_SIZE = 1;
 
-export const LoadingIcon = ({spin = DEFAULT_SPIN, size = DEFAULT_SIZE}) => {
+export const LoadingIcon = ({spin, size}) => {
 
   const { palette: {secondary}} = useTheme();
 
@@ -16,9 +16,9 @@ export const LoadingIcon = ({spin = DEFAULT_SPIN, size = DEFAULT_SIZE}) => {
       sx={sx.cont}
     >
       <Icon
+        color={secondary.main}
         path={mdiLoading}
         size={size}
-        color={secondary.main}
         spin={spin}
 
       />
@@ -39,4 +39,9 @@ const sx = {
 LoadingIcon.propTypes = {
   size: PropTypes.number,
   spin: PropTypes.number
+};
+
+LoadingIcon.defaultProps = {
+  size: DEFAULT_SIZE,
+  spin: DEFAULT_SPIN
 };

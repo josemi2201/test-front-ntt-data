@@ -14,7 +14,7 @@ export const PropertyView = ({description, value}) => {
         <Typography
           sx={sx.description}
         >
-          {description}:
+          {`${description}: `}
         </Typography>
         <Typography
           sx={sx.value}

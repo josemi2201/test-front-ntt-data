@@ -30,14 +30,16 @@ export const ProductsListPage = () => {
   return (
     <Header>
       <Grid
-        container
-        sx={sx.contSearch}
         component="section"
+        container
         spacing={1}
+        sx={sx.contSearch}
       >
         <Grid
           item
-          xs={12} md={3} lg={2}
+          lg={2}
+          md={3}
+          xs={12}
         >
           <SearchField
             isFirstRender={isFirstRender.current}
@@ -52,15 +54,18 @@ export const ProductsListPage = () => {
         sx={sx.contProducts}
       >
         {
-          products.map((product, index) => <Grid
-            key={product.id + index}
-            item
-            className="animate__animated animate__fadeIn"
-            xs={12} md={4} lg={3}
-          >
-            <ProductListItem product={product} />
-          </Grid>
-          )
+          products.map((product) => (
+            <Grid
+              className="animate__animated animate__fadeIn"
+              item
+              key={product.id}
+              lg={3}
+              md={4}
+              xs={12}
+            >
+              <ProductListItem product={product} />
+            </Grid>
+          ))
         }
       </Grid>
     </Header>
