@@ -1,7 +1,8 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Typography } from "@mui/material";
+import React from "react";
 
 export const NotFound = () => {
+
   return (
     <Box
       sx={sx.cont}
@@ -12,16 +13,18 @@ export const NotFound = () => {
         Not Found
       </Typography>
     </Box>
-  )
-}
+  );
+
+};
+
 
 const sx = {
   cont: {
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
+    display: "flex",
     height: "100%",
+    justifyContent: "center"
   }
-}
+};
 
 

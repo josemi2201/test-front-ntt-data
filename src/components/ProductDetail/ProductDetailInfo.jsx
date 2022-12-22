@@ -1,7 +1,7 @@
-import { Box, Typography, useTheme } from '@mui/material';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { PropertyView } from '../UI/PropertyView';
+import { Box, Typography, useTheme } from "@mui/material";
+import PropTypes from "prop-types";
+import React from "react";
+import { PropertyView } from "../UI/PropertyView";
 
 export const ProductDetailInfo = ({product}) => {
 
@@ -16,10 +16,10 @@ export const ProductDetailInfo = ({product}) => {
     battery,
     cameras,
     dimensions,
-    weight,
-  } = product
+    weight
+  } = product;
 
-  const { palette: { secondary } } = useTheme()
+  const { palette: { secondary } } = useTheme();
 
   return (
     <Box>
@@ -28,14 +28,14 @@ export const ProductDetailInfo = ({product}) => {
       >
         {model}
       </Typography>
-       <Typography
+      <Typography
         sx={{
           color: secondary.light
         }}
       >
         {brand}
       </Typography>
-      <Typography 
+      <Typography
         variant="h5"
         sx={sx.price}
       >
@@ -45,7 +45,7 @@ export const ProductDetailInfo = ({product}) => {
       <Box component="hr" />
       <Box
         component="ul"
-      > 
+      >
         <PropertyView
           description="model"
           value={model}
@@ -84,15 +84,16 @@ export const ProductDetailInfo = ({product}) => {
         />
       </Box>
     </Box>
-  )
-}
+  );
+
+};
 
 const sx = {
   price: {
     fontWeight: "bold"
   }
-}
+};
 
 ProductDetailInfo.propTypes = {
   product: PropTypes.object.isRequired
-}
+};

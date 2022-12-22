@@ -7,9 +7,7 @@ La aplicación esta desplegada en netlify y se puede visitar con este enlace, di
 [https://test-front-ntt-data.netlify.app/](https://test-front-ntt-data.netlify.app/)
 
 # Backend
-Debido a los fallos con la webapi facilitada para la prueba, se ha realizado un backend en node con express, continue datos mockeados y cumplen los mismos requisitos que la api principal.
-
-El repositorio es: [https://github.com/josemi2201/backend-test-front-ntt-data](https://github.com/josemi2201/backend-test-front-ntt-data)
+Debido a los fallos con la webapi facilitada para la prueba, se ha realizado un backend en node con express. Contiene datos mockeados y cumplen los mismos requisitos que la api principal.
 
 También dispone de integración continua con netlify, su url es: [https://backend-test-front-ntt-data.netlify.app](https://backend-test-front-ntt-data.netlify.app)
 

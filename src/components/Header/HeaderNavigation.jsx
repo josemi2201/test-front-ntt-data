@@ -1,23 +1,29 @@
-import { mdiArrowLeft } from '@mdi/js'
-import { Avatar, Box, IconButton as MuiIconButton } from '@mui/material'
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import logoImg from '../../assets/logo.png'
-import { IconButton } from '../UI/IconButton'
-import { HeaderBreadcrumbs } from './HeaderBreadcrumbs'
+import { mdiArrowLeft } from "@mdi/js";
+import { Avatar, Box, IconButton as MuiIconButton } from "@mui/material";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import logoImg from "../../assets/logo.png";
+import { IconButton } from "../UI/IconButton";
+import { HeaderBreadcrumbs } from "./HeaderBreadcrumbs";
+
+const PREVIOUS_INDEX = -1;
 
 export const HeaderNavigation = () => {
 
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleClickLogo = () => {
-    navigate("/")
-  }
+
+    navigate("/");
+
+  };
 
   const handleClickPreviousPage = () => {
-    navigate(-1)
-  }
+
+    navigate(PREVIOUS_INDEX);
+
+  };
 
   return (
     <Box
@@ -36,14 +42,15 @@ export const HeaderNavigation = () => {
       }
       <HeaderBreadcrumbs />
     </Box>
-  )
-}
+  );
+
+};
 
 const sx = {
   headerNavigation: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 2,
-  },
-}
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    gap: 2
+  }
+};

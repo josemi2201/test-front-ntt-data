@@ -1,6 +1,9 @@
-import { Autocomplete, TextField, useTheme } from '@mui/material';
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import { Autocomplete, TextField, useTheme } from "@mui/material";
+import PropTypes from "prop-types";
+import React, { useEffect } from "react";
+
+const FIRST_POSITION = 0;
+const LENGTH_ONE = 1;
 
 export const Select = (props) => {
 
@@ -11,65 +14,79 @@ export const Select = (props) => {
     value,
     handleChange,
     touched,
-    errors,
-  } = props
+    errors
+  } = props;
 
-  const defaultValue = options.length === 1 ? options[0] : null
+  const defaultValue = options.length === LENGTH_ONE
+    ? options[FIRST_POSITION]
+    : null;
 
-  const { palette: { primary } } = useTheme()
+  const { palette: { primary } } = useTheme();
 
   useEffect(() => {
 
-    defaultValue && handleChange({
-        target: { name, value: defaultValue.id }
-    })
-    
-  }, [])
-  
+    if (defaultValue) {
+
+      handleChange({target: {
+        name,
+        value: defaultValue.id
+      }});
+
+    }
+
+  }, []);
+
   return (
     <Autocomplete
-        disablePortal
-        name={name}
-        options={options}
-        defaultValue={defaultValue}
-        getOptionLabel={(option) => option.label}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
-        onChange={(event, newValue) => {
-            const newValueForm = {
-                target: { name, value: "" }
-            };
+      disablePortal
+      name={name}
+      options={options}
+      defaultValue={defaultValue}
+      getOptionLabel={(option) => option.label}
+      isOptionEqualToValue={
+        (option, valueToCompare) => option.id === valueToCompare.id
+      }
+      onChange={(event, newValue) => {
 
-            if(newValue){
-                newValueForm.target.value = newValue.id
-            }
+        const newValueForm = {target: {
+          name,
+          value: ""
+        }};
 
-            handleChange(newValueForm)
-        }}
-        renderInput={(params) => 
-            <TextField 
-                {...params} 
-                label={label} 
-                value={value}
-                error={ touched[name] && Boolean(errors[name]) }
-                helperText={ touched[name] && errors[name] }
-                InputLabelProps={{
-                  style: { color: primary.contrastText },
-                }}
-            />
+        if (newValue) {
+
+          newValueForm.target.value = newValue.id;
+
         }
+
+        handleChange(newValueForm);
+
+      }}
+      renderInput={(params) => <TextField
+        {...params}
+        label={label}
+        value={value}
+        error={ touched[name] && Boolean(errors[name]) }
+        helperText={ touched[name] && errors[name] }
+        InputLabelProps={{
+          style: { color: primary.contrastText }
+        }}
+      />
+      }
     />
-  )
-}
+  );
+
+};
 
 Select.propTypes = {
+  errors: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
+  touched: PropTypes.object.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired,
-  handleChange: PropTypes.func.isRequired,
-  touched: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-}
+  ]).isRequired
+};

@@ -1,18 +1,37 @@
-import { Box, Card, CardContent, CardMedia, Typography, useTheme } from '@mui/material';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  useTheme
+} from "@mui/material";
+import PropTypes from "prop-types";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const DEFAULT_IMAGE =
+  "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg";
 
 export const ProductListItem = ({product}) => {
 
-  const { id, brand, model, description, priceDescription, imgUrl} = product
-  
-  const { palette: { secondary } } = useTheme()
+  const {
+    id,
+    brand,
+    model,
+    description,
+    priceDescription,
+    imgUrl
+  } = product;
+
+  const { palette: { secondary } } = useTheme();
   const navigate = useNavigate();
 
   const handleClickProduct = () => {
+
     navigate(`/product/${id}`);
-  }
+
+  };
 
   return (
     <Box>
@@ -25,9 +44,12 @@ export const ProductListItem = ({product}) => {
           alt={description}
           src={imgUrl}
           sx={sx.img}
+          loading="lazy"
           onError={({target}) => {
+
             target.onError = null;
-            target.src = "https://cdn.pixabay.com/photo/2014/08/05/10/27/iphone-410311_960_720.jpg"
+            target.src = DEFAULT_IMAGE;
+
           }}
         />
         <CardContent>
@@ -43,32 +65,33 @@ export const ProductListItem = ({product}) => {
           >
             {brand}
           </Typography>
-          <Typography 
+          <Typography
             variant="h5"
             sx={sx.price}
           >
             {priceDescription}
           </Typography>
         </CardContent>
-      </Card> 
+      </Card>
     </Box>
-  )
-}
+  );
+
+};
 
 const sx = {
   card: {
-    minHeight: "250px",
-    cursor: "pointer",
     borderRadius: "0px",
+    cursor: "pointer",
+    minHeight: "250px"
   },
   img: {
-    height: "274px",  
+    height: "274px"
   },
   price: {
     fontWeight: "bold"
   }
-}
+};
 
 ProductListItem.propTypes = {
   product: PropTypes.object.isRequired
-}
+};

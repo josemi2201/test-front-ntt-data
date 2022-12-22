@@ -1,74 +1,92 @@
-import { Breadcrumbs, useTheme } from '@mui/material'
-import { Box } from '@mui/system'
-import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useData } from '../../hooks/useData'
+import { Breadcrumbs, useTheme } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useProduct } from "../../hooks/useProduct";
+
+const FIRST_INDEX = 0;
+const SECOND_INDEX = 1;
+const AUX_LENGTH = 1;
 
 export const HeaderBreadcrumbs = () => {
 
-  const { palette: { primary, secondary} } = useTheme()
-  const location = useLocation()
-  const { getProduct } = useData()
-  
-  const [paths, setPaths] = useState([])
-  const [pathsDescriptions, setPathsDescriptions] = useState([])
+  const { palette: { primary, secondary} } = useTheme();
+  const location = useLocation();
+  const { getProduct } = useProduct();
+
+  const [paths, setPaths] = useState([]);
+  const [pathsDescriptions, setPathsDescriptions] = useState([]);
 
   useEffect(() => {
-    const paths = location.pathname.split('/').filter(path => path !== '')
-    setPaths(paths)
-    getDescriptions(paths)
-  }, [location])
-  
-  const getDescriptions = async (paths) => {
-    if(paths[0] === 'product' && paths[1]){
+
+    const newpaths = location.pathname.split("/").filter((path) => path !== "");
+    setPaths(newpaths);
+    getDescriptions([...newpaths]);
+
+  }, [location]);
+
+  const getDescriptions = async (pathsList) => {
+
+    if (pathsList[FIRST_INDEX] === "product" && pathsList[SECOND_INDEX]) {
+
       try {
-        const { description } = await getProduct(paths[1])
-        paths[1] = description
+
+        const { description } = await getProduct(pathsList[SECOND_INDEX]);
+        pathsList[SECOND_INDEX] = description;
+
       } catch (error) {
-        paths[1] = "Not-found"
+
+        pathsList[SECOND_INDEX] = "Not-found";
+
       }
+
     }
-    setPathsDescriptions(paths)
-  }
-  
+
+    setPathsDescriptions(pathsList);
+
+  };
+
   const getPathBreadcrumbs = (index) => {
-    const href = `/${paths.slice(0, index + 1).join('/')}`
-    return href
-  }
+
+    const toIndex = index + AUX_LENGTH;
+    return `/${paths.slice(FIRST_INDEX, toIndex).join("/")}`;
+
+  };
 
   return (
     <Breadcrumbs color={primary.contrastText}>
       {
-        paths.map((path, index) => (
-          <Box
-            key={index}
-            sx={{
-              '& > a': {
-                textDecoration: 'none',
-                color: primary.contrastText,
-              },
-              '& > a:hover': {
-                textDecoration: 'underline',
-                backgroundColor: secondary.main,
-                color: secondary.contrastText,
-                paddingTop: "4px",
-                paddingBottom: "4px",
-              },
+        paths.map((path, index) => <Box
+          key={index}
+          sx={{
+            "& > a": {
+              color: primary.contrastText,
+              textDecoration: "none"
+            },
+            "& > a:hover": {
+              backgroundColor: secondary.main,
+              color: secondary.contrastText,
+              paddingBottom: "4px",
+              paddingTop: "4px",
+              textDecoration: "underline"
+            }
+          }}
+        >
+          <Link
+            to={getPathBreadcrumbs(index)}
+            style={{
+              pointerEvents: pathsDescriptions[index] === "Not-found"
+                ? "none"
+                : "auto"
             }}
           >
-            <Link
-              to={getPathBreadcrumbs(index)}
-              style={{
-                pointerEvents: pathsDescriptions[index] === "Not-found" ? "none" : "auto",
-              }}
-            >
-              {pathsDescriptions[index]}
-            </Link>
-          </Box>
- 
-        ))
+            {pathsDescriptions[index]}
+          </Link>
+        </Box>
+        )
       }
     </Breadcrumbs>
-  )
-}
+  );
+
+};
 
