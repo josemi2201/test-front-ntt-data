@@ -1,5 +1,10 @@
-import moment from "moment"
+import moment from "moment";
 
 export const getDiffBetweenDates = (firstDate, secondDate, operator) => {
-  return Math.abs(moment(firstDate).diff(moment(secondDate), operator))
-}
+
+  Math.abs(moment(firstDate).diff(
+    moment(secondDate),
+    operator
+  ));
+
+};

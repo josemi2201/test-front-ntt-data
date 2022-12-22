@@ -1,8 +1,8 @@
-import { AppBar, Box } from '@mui/material'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { HeaderActions } from './HeaderActions'
-import { HeaderNavigation } from './HeaderNavigation'
+import { AppBar, Box } from "@mui/material";
+import PropTypes from "prop-types";
+import React from "react";
+import { HeaderActions } from "./HeaderActions";
+import { HeaderNavigation } from "./HeaderNavigation";
 
 export const Header = ({children}) => {
 
@@ -18,35 +18,36 @@ export const Header = ({children}) => {
         <HeaderNavigation />
         <HeaderActions />
       </AppBar>
-      <Box 
+      <Box
         component="main"
         sx={sx.main}
       >
         {children}
       </Box>
     </Box>
-  )
-}
+  );
+
+};
 
 const sx = {
-  header: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-  },
   appbar: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: "0 8px",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: "0 8px"
+  },
+  header: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%"
   },
   main: {
-    backgroundColor: 'background.default',
+    backgroundColor: "background.default"
   }
-}
+};
 
 Header.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired
+};
 

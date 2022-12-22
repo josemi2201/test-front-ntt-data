@@ -31,7 +31,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             model
             :
@@ -50,7 +50,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             processor
             :
@@ -69,7 +69,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             RAM
             :
@@ -88,7 +88,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             S.O.
             :
@@ -107,7 +107,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             screen resolution
             :
@@ -126,7 +126,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             battery
             :
@@ -145,7 +145,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             cameras
             :
@@ -164,7 +164,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             dimensions
             :
@@ -183,7 +183,7 @@ exports[`Test <ProductDetailInfo /> Match whit snapshot 1`] = `
           class="MuiBox-root css-k008qs"
         >
           <p
-            class="MuiTypography-root MuiTypography-body1 css-iq0aay-MuiTypography-root"
+            class="MuiTypography-root MuiTypography-body1 css-c7zlro-MuiTypography-root"
           >
             weight
             :

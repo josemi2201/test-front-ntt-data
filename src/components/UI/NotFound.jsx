@@ -1,7 +1,10 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Typography } from "@mui/material";
+import React from "react";
+
+const DEFAULT_MESSAGE = "Not Found";
 
 export const NotFound = () => {
+
   return (
     <Box
       sx={sx.cont}
@@ -9,19 +12,21 @@ export const NotFound = () => {
       <Typography
         variant="h1"
       >
-        Not Found
+        {DEFAULT_MESSAGE}
       </Typography>
     </Box>
-  )
-}
+  );
+
+};
+
 
 const sx = {
   cont: {
-    display: "flex",
-    justifyContent: "center",
     alignItems: "center",
+    display: "flex",
     height: "100%",
+    justifyContent: "center"
   }
-}
+};
 
 

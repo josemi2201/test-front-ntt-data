@@ -1,59 +1,80 @@
-import { mdiCartArrowDown } from '@mdi/js';
-import { Box, Typography } from '@mui/material';
-import { useFormik } from 'formik';
-import PropTypes from 'prop-types';
-import React from 'react';
-import * as yup from 'yup';
-import { showToast } from '../../helpers/toast';
-import { useData } from '../../hooks/useData';
-import { Button } from '../UI/Button';
-import { Select } from '../UI/Select';
+import { mdiCartArrowDown } from "@mdi/js";
+import { Box, Typography } from "@mui/material";
+import { useFormik } from "formik";
+import PropTypes from "prop-types";
+import React from "react";
+import * as yup from "yup";
+import { showToast } from "../../helpers/toast";
+import { useCart } from "../../hooks/useCart";
+import { Button } from "../UI/Button";
+import { Select } from "../UI/Select";
 
+const TITLE_MODULE = "Options";
 
 const validationSchema = yup.object({
-  storageCode: yup
-      .string()
-      .required('Color is required'),
-  colorCode: yup
-      .string()
-      .required('Storage is required'),
+  colorCode: yup.
+    string().
+    required("Storage is required"),
+  storageCode: yup.
+    string().
+    required("Color is required")
 });
 
 export const ProductDetailActions = ({product}) => {
 
-  const { addCart } = useData();
-  
-  const { values, errors, touched, isSubmitting, handleSubmit, handleChange } = useFormik({
+  const { addCart } = useCart();
+
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleSubmit,
+    handleChange
+  } = useFormik({
     initialValues: {
-      storageCode: '',
-      colorCode: '',
+      colorCode: "",
+      storageCode: ""
     },
-    validationSchema: validationSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-        try {    
-            const data = {
-              id: product.id,
-              ...values,
-            }
+    onSubmit: async (valuesForm, { setSubmitting }) => {
 
-            await addCart(data)
+      try {
 
-            setSubmitting(false)
-            
-            showToast("Product added to cart", "success")
-        } catch (error) {
-          showToast(error.message, "error")
-        }
+        const data = {
+          id: product.id,
+          ...valuesForm
+        };
+
+        await addCart(data);
+
+        setSubmitting(false);
+
+        showToast(
+          "Product added to cart",
+          "success"
+        );
+
+      } catch (error) {
+
+        const errorMessage = error.response?.data?.error
+          ? error.response.data.error
+          : error.message;
+
+        showToast(errorMessage, "error");
+
+      }
+
     },
+    validationSchema
   });
 
   return (
     <Box>
       <Typography
-        variant="h4"
         sx={sx.title}
+        variant="h4"
       >
-        Options
+        {TITLE_MODULE}
       </Typography>
       <Box component="hr" />
       <Box>
@@ -62,45 +83,46 @@ export const ProductDetailActions = ({product}) => {
           onSubmit={handleSubmit}
           sx={sx.form}
         >
-          <Select 
+          <Select
+            errors={errors}
+            handleChange={handleChange}
             label="Storage"
             name="storageCode"
             options={product.storages}
-            value={values.storageCode}
-            handleChange={handleChange}
             touched={touched}
-            errors={errors}
+            value={values.storageCode}
           />
-          <Select 
+          <Select
+            errors={errors}
+            handleChange={handleChange}
             label="Color"
             name="colorCode"
             options={product.colors}
-            value={values.colorCode}
-            handleChange={handleChange}
             touched={touched}
-            errors={errors}
+            value={values.colorCode}
           />
-          <Button 
+          <Button
             icon={mdiCartArrowDown}
+            isLoading={isSubmitting}
             text="Add to cart"
             type="submit"
-            isLoading={isSubmitting}
           />
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+
+};
 
 const sx = {
-  form:{
-    display: 'flex',
-    flexDirection: 'column',
+  form: {
+    display: "flex",
+    flexDirection: "column",
     gap: 3,
-    marginTop: 3,
+    marginTop: 3
   }
-}
+};
 
 ProductDetailActions.propTypes = {
   product: PropTypes.object.isRequired
-}
+};
