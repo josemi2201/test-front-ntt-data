@@ -2,7 +2,7 @@
 Test Front hecho en react para prueba técnica de NTT DATA
 
 # Despliegue
-La aplicación esta desplegada en netlify y se puede visitar con este enlace, dispone de integración continua cada vez que se hacer un merge en la rama main
+La aplicación esta desplegada en netlify y se puede visitar con este enlace, dispone de integración continua que se dispara cada vez que se hace un merge en la rama main.
 
 [https://test-front-ntt-data.netlify.app/](https://test-front-ntt-data.netlify.app/)
 
