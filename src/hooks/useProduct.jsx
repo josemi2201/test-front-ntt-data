@@ -1,10 +1,52 @@
+import { useContext, useEffect, useState } from "react";
 import { testApi } from "../api/testApi";
-import { TIME_OPERATOR, TIME_TO_UPDATE } from "../global/vars";
+import { ProductContext } from "../context/ProductContext";
+import { validateExpiredDate } from "../helpers/expiredDate";
 import { formatProduct } from "../helpers/format";
 import { getLocalStorage, setLocalStorage } from "../helpers/localStorage";
-import { getDiffBetweenDates } from "../helpers/time";
+import { showToast } from "../helpers/toast";
 
-export const useProduct = () => {
+export const useProduct = (idProduct) => {
+
+  const {product, setProduct} = useContext(ProductContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [errorProduct, setErrorProduct] = useState({
+    isError: false,
+    message: ""
+  });
+
+  useEffect(() => {
+
+    if (!idProduct) {
+
+      return;
+
+    }
+
+    getProduct(idProduct).
+      catch((error) => {
+
+        setIsLoading(false);
+
+        setErrorProduct({
+          isError: true,
+          message: error.message
+        });
+
+      });
+
+  }, []);
+
+  useEffect(() => {
+
+    if (errorProduct.isError) {
+
+      showToast(errorProduct.message);
+
+    }
+
+  }, [errorProduct]);
 
   const getProduct = async (id) => {
 
@@ -12,21 +54,8 @@ export const useProduct = () => {
       productsDetails: productsDetailsLocal = {}
     } = getLocalStorage("vm-productsDetails", true);
 
-    const product = productsDetailsLocal[id];
-    const updateAt = product
-      ? product.updateAt
-      : null;
-
-    const diffHours = getDiffBetweenDates(
-      updateAt,
-      new Date(),
-      TIME_OPERATOR
-    );
-
-    const isExpiredDate =
-      diffHours >= TIME_TO_UPDATE ||
-      !updateAt ||
-      !productsDetailsLocal[id];
+    const productLocal = productsDetailsLocal[id];
+    const isExpiredDate = validateExpiredDate(productLocal);
 
     if (isExpiredDate) {
 
@@ -42,18 +71,25 @@ export const useProduct = () => {
         true
       );
 
+      setProduct(productsDetailsLocal[id]);
+      setIsLoading(false);
+
       return productsDetailsLocal[id];
 
     }
 
-    return product
-      ? formatProduct(product)
-      : {};
+    const productFormat = formatProduct(productLocal);
+
+    setProduct(formatProduct(productFormat));
+    setIsLoading(false);
+
+    return productFormat;
 
   };
 
   return {
-    getProduct
+    isLoading,
+    product
   };
 
 };

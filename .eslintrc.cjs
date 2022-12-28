@@ -35,8 +35,8 @@ module.exports = {
       "react/jsx-indent": ["error", 2],
       "react/jsx-indent-props": ["error", 2],
       "max-lines-per-function": ["error", 80],
-      "max-statements": ["error", 12],
-      "max-lines-per-function": ["error", 100],
+      "max-statements": ["error", 20],
+      "max-lines-per-function": ["error", 110],
       "object-curly-spacing": "off",
       "linebreak-style": "off",
       "quote-props": "off",
@@ -63,5 +63,6 @@ module.exports = {
       "react/forbid-component-props": "off",
       "react/jsx-no-constructed-context-values": "off",
       "react/no-array-index-key": "off",
+      "no-console": "off",
     }
 }

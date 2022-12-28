@@ -1,51 +1,114 @@
+import { useEffect, useRef, useState } from "react";
 import { testApi } from "../api/testApi";
-import { EMPTY, TIME_OPERATOR, TIME_TO_UPDATE } from "../global/vars";
+import { EMPTY } from "../global/vars";
+import { validateExpiredDate } from "../helpers/expiredDate";
 import { formatProduct } from "../helpers/format";
 import { getLocalStorage, setLocalStorage } from "../helpers/localStorage";
-import { getDiffBetweenDates } from "../helpers/time";
+import { showToast } from "../helpers/toast";
 
 export const useProducts = () => {
 
-  const getProducts = async () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [errorProducts, setErrorProducts] = useState({
+    isError: false,
+    message: ""
+  });
+
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+
+    getProducts().
+      catch((error) => {
+
+        setIsLoading(false);
+
+        setErrorProducts({
+          isError: true,
+          message: error.message
+        });
+
+      });
+
+  }, []);
+
+  useEffect(() => {
+
+    if (errorProducts.isError) {
+
+      showToast(errorProducts.message);
+
+    }
+
+  }, [errorProducts]);
+
+  const getProducts = async (filterFunction) => {
+
+    setIsLoading(true);
+
+    isFirstRender.current = false;
+
+    const productsLocalObject = getLocalStorage("vm-products", true);
 
     const {
-      updateAt,
       products: productsLocal = []
-    } = getLocalStorage("vm-products", true);
+    } = productsLocalObject;
 
-    const diffHours = getDiffBetweenDates(
-      updateAt,
-      new Date(),
-      TIME_OPERATOR
+    const isExpiredDate = validateExpiredDate(
+      productsLocalObject,
+      productsLocal.length === EMPTY
     );
-
-    const isExpiredDate =
-      diffHours >= TIME_TO_UPDATE ||
-      !updateAt ||
-      productsLocal.length === EMPTY;
 
     if (isExpiredDate) {
 
       const {data} = await testApi.get("/product");
-      const products = data.map(formatProduct);
+      let productsFormat = data.map(formatProduct);
+
+      if (filterFunction) {
+
+        productsFormat = productsFormat.filter(filterFunction);
+
+      }
 
       setLocalStorage("vm-products",
         {
-          products,
+          products: productsFormat,
           updateAt: new Date()
         },
-        true);
+        true
+      );
 
-      return products;
+      setProducts(productsFormat);
+      setIsLoading(false);
+
+      return productsFormat;
 
     }
 
-    return productsLocal.map(formatProduct);
+    let productsLocalFormat = productsLocal.map(formatProduct);
+
+    if (filterFunction) {
+
+      productsLocalFormat = productsLocalFormat.filter(filterFunction);
+
+    }
+
+    setProducts(productsLocalFormat);
+    setIsLoading(false);
+
+    return productsLocalFormat;
 
   };
 
   return {
-    getProducts
+    errorProducts,
+    getProducts,
+    isFirstRender,
+    isLoading,
+    products,
+    setProducts
   };
 
 };

@@ -1,5 +1,5 @@
 import { Box, Grid, useTheme } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import {
@@ -10,38 +10,18 @@ import {
 } from "../components/ProductDetail/ProductDetailInfo";
 import { LoadingIcon } from "../components/UI/LoadingIcon";
 import { NotFound } from "../components/UI/NotFound";
-import { showToast } from "../helpers/toast";
 import { useProduct } from "../hooks/useProduct";
 
 export const ProductDetailPage = () => {
 
   const { palette: { background } } = useTheme();
   const { id } = useParams();
-  const { getProduct } = useProduct();
-
-  const [product, setProduct] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  const {
-    id: productId,
-    imgUrl
-  } = product;
-
-  useEffect(() => {
-
-    getProduct(id).
-      then((newProduct) => setProduct(newProduct)).
-      catch((error) => showToast(error.message,
-        "error")).
-      finally(() => setIsLoading(false));
-
-  },
-  []);
+  const { isLoading, product } = useProduct(id);
 
   return (
     <Header>
       {
-        (productId && !isLoading) &&
+        (product && product.id && !isLoading) &&
           <Grid
             container
             sx={sx.contProduct}
@@ -56,7 +36,7 @@ export const ProductDetailPage = () => {
               <Box
                 className="animate__animated animate__fadeIn"
                 component="img"
-                src={imgUrl}
+                src={product.imgUrl}
                 sx={sx.img}
               />
             </Grid>
@@ -89,7 +69,7 @@ export const ProductDetailPage = () => {
       {
         isLoading
           ? <LoadingIcon size={5} />
-          : !productId && <NotFound />
+          : !product && <NotFound />
       }
     </Header>
   );
