@@ -1,14 +1,11 @@
 import { TextField, useTheme } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
-import { showToast } from "../../helpers/toast";
 import { checkIncludes } from "../../helpers/validations";
-import { useProducts } from "../../hooks/useProducts";
 
-export const SearchField = ({isFirstRender, setProducts}) => {
+export const SearchField = ({isFirstRender, getProducts}) => {
 
   const { palette: { background, primary } } = useTheme();
-  const { getProducts } = useProducts();
 
   const [search, setSearch] = useState("");
 
@@ -16,19 +13,10 @@ export const SearchField = ({isFirstRender, setProducts}) => {
 
     if (!isFirstRender) {
 
-      getProducts().
-        then((products) => {
-
-          const filteredProducts = products.filter(
-            ({brand, model}) => (
-              (brand && checkIncludes(brand, search)) ||
-              (model && checkIncludes(model, search))
-            )
-          );
-          setProducts(filteredProducts);
-
-        }).
-        catch((error) => showToast(error.message, "error"));
+      getProducts(({brand, model}) => (
+        (brand && checkIncludes(brand, search)) ||
+        (model && checkIncludes(model, search))
+      ));
 
     }
 
@@ -58,6 +46,6 @@ export const SearchField = ({isFirstRender, setProducts}) => {
 };
 
 SearchField.propTypes = {
-  isFirstRender: PropTypes.bool.isRequired,
-  setProducts: PropTypes.func.isRequired
+  getProducts: PropTypes.func.isRequired,
+  isFirstRender: PropTypes.bool.isRequired
 };

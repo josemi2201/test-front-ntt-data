@@ -2,7 +2,6 @@ import { mdiArrowLeft } from "@mdi/js";
 import { Avatar, Box, IconButton as MuiIconButton } from "@mui/material";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import logoImg from "../../assets/logo.png";
 import { IconButton } from "../UI/IconButton";
 import { HeaderBreadcrumbs } from "./HeaderBreadcrumbs";
 
@@ -30,7 +29,7 @@ export const HeaderNavigation = () => {
       sx={sx.headerNavigation}
     >
       <MuiIconButton onClick={handleClickLogo}>
-        <Avatar src={logoImg} />
+        <Avatar src="/assets/logo.png" />
       </MuiIconButton>
       {
         pathname !== "/product" &&

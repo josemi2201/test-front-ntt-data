@@ -1,8 +1,8 @@
 import { Breadcrumbs, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useProduct } from "../../hooks/useProduct";
+import { ProductContext } from "../../context/ProductContext";
 
 const FIRST_INDEX = 0;
 const SECOND_INDEX = 1;
@@ -10,35 +10,29 @@ const AUX_LENGTH = 1;
 
 export const HeaderBreadcrumbs = () => {
 
+  const { product } = useContext(ProductContext);
+
   const { palette: { primary, secondary} } = useTheme();
   const location = useLocation();
-  const { getProduct } = useProduct();
 
   const [paths, setPaths] = useState([]);
   const [pathsDescriptions, setPathsDescriptions] = useState([]);
 
   useEffect(() => {
 
-    const newpaths = location.pathname.split("/").filter((path) => path !== "");
-    setPaths(newpaths);
-    getDescriptions([...newpaths]);
+    const newPaths = location.pathname.split("/").filter((path) => path !== "");
+    setPaths(newPaths);
+    getDescriptions([...newPaths]);
 
-  }, [location]);
+  }, [location, product]);
 
-  const getDescriptions = async (pathsList) => {
+  const getDescriptions = (pathsList) => {
 
     if (pathsList[FIRST_INDEX] === "product" && pathsList[SECOND_INDEX]) {
 
-      try {
-
-        const { description } = await getProduct(pathsList[SECOND_INDEX]);
-        pathsList[SECOND_INDEX] = description;
-
-      } catch (error) {
-
-        pathsList[SECOND_INDEX] = "Not-found";
-
-      }
+      pathsList[SECOND_INDEX] = product
+        ? product.description
+        : "Not-found";
 
     }
 
